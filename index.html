@@ -216,7 +216,6 @@
 
   .hero-title {
     font-family: var(--font-display);
-    font-size: clamp(40px, 5.8vw, 84px);
     font-weight: 300;
     line-height: 1.1;
     white-space: nowrap;
@@ -225,9 +224,16 @@
     margin-bottom: 32px;
   }
 
+  .hero-title-top {
+    font-size: clamp(32px, 4.6vw, 68px);
+    display: inline;
+  }
+
   .hero-title em {
     font-style: italic;
     color: var(--gold-light);
+    font-size: clamp(48px, 7vw, 100px);
+    display: inline;
   }
 
   .hero-sub {
@@ -1392,7 +1398,7 @@
   <div class="hero-content">
     <p class="hero-eyebrow">Luxury Event Entertainment · New York & New Jersey</p>
     <img src="BEG-trans.png" alt="Barnstorm Entertainment" style="width:280px;height:auto;margin:0 auto 24px;display:block;opacity:0.95;">
-    <h1 class="hero-title">Where Great Events Become<br><em>Legendary Parties.</em></h1>
+    <h1 class="hero-title"><span class="hero-title-top">Where Great Events Become</span><br><em>Legendary Parties.</em></h1>
     <p class="hero-sub">Flagship bands, curated talent, and concert-level audio and lighting — all under one roof.</p>
     <div class="hero-actions">
       <a href="#bands" class="btn-primary"><span>Explore Our Bands</span></a>

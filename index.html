@@ -1341,22 +1341,9 @@
 
   .footer-legal a:hover { color: var(--ivory-dim); }
 
-  /* ---- SCROLL ANIMATIONS ---- */
-  .reveal {
-    opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
-  .reveal-delay-4 { transition-delay: 0.4s; }
+  /* Reveal classes kept for JS compatibility but content always visible */
+  .reveal { opacity: 1; transform: none; }
+  .reveal.visible { opacity: 1; transform: none; }
 
   /* ---- MOBILE ---- */
   @media (max-width: 900px) {
@@ -1409,7 +1396,7 @@
   <div class="hero-lines"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Luxury Event Entertainment · New York & New Jersey</p>
-    <h1 class="hero-title">Unforgettable Live Music.<br><em>Elevated Event Production.</em></h1>
+    <h1 class="hero-title">Where Great Events Become<br><em>Legendary Parties.</em></h1>
     <p class="hero-sub">Flagship bands, curated talent, and concert-level audio and lighting — all under one roof.</p>
     <div class="hero-actions">
       <a href="#bands" class="btn-primary"><span>Explore Our Bands</span></a>
@@ -1452,7 +1439,7 @@
   <div class="why-grid">
     <div>
       <div class="section-eyebrow reveal">Why Barnstorm</div>
-      <h2 class="section-title reveal reveal-delay-1">Music. Production.<br><em>Point of View.</em></h2>
+      <h2 class="section-title reveal reveal-delay-1">Creating the Soundtrack to<br><em>Unforgettable Celebrations.</em></h2>
       <p class="section-body reveal reveal-delay-2">We're not a directory. We're a curated entertainment and production company with a flagship sound, a defined aesthetic, and the technical expertise to match. One call. One team. One unforgettable night.</p>
       <div class="why-pillars">
         <div class="pillar reveal reveal-delay-1">

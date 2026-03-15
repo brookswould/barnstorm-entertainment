@@ -114,10 +114,30 @@
   .hero-video-bg {
     position: absolute;
     inset: 0;
-    background: 
-      radial-gradient(ellipse at 30% 60%, rgba(201,168,76,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 20%, rgba(158,74,43,0.06) 0%, transparent 50%),
-      linear-gradient(160deg, #0f0d08 0%, #1a1710 40%, #0a0905 100%);
+    overflow: hidden;
+    background: #0a0905;
+  }
+
+  .hero-video-bg iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* 16:9 ratio — oversized so it always covers the viewport */
+    width: max(100vw, 177.78vh);
+    height: max(56.25vw, 100vh);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border: none;
+  }
+
+  /* Dark cinematic overlay so text stays readable */
+  .hero-video-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 60%, rgba(201,168,76,0.06) 0%, transparent 60%),
+      linear-gradient(to bottom, rgba(10,9,5,0.55) 0%, rgba(10,9,5,0.45) 60%, rgba(10,9,5,0.75) 100%);
+    z-index: 1;
   }
 
   /* Animated grain overlay */
@@ -1376,7 +1396,15 @@
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-video-bg"></div>
+  <div class="hero-video-bg">
+    <iframe
+      src="https://www.youtube.com/embed/7FjA8jGst_I?autoplay=1&mute=1&loop=1&playlist=7FjA8jGst_I&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&fs=0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+      title="Barnstorm background video"
+    ></iframe>
+  </div>
+  <div class="hero-video-overlay"></div>
   <div class="hero-lines"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Luxury Event Entertainment · New York & New Jersey</p>
@@ -1723,7 +1751,7 @@
           <div class="inquiry-detail-icon">✉</div>
           <div>
             <h4>Email</h4>
-            <p>hello@barnstormentertainment.com</p>
+            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8de5e8e1e1e2cdefecffe3fef9e2ffe0e8e3f9e8fff9ece4e3e0e8e3f9a3eee2e0">[email&#160;protected]</a></p>
           </div>
         </div>
         <div class="inquiry-detail reveal reveal-delay-3">
@@ -1867,7 +1895,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Sticky nav
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
@@ -1890,14 +1918,4 @@
   // Form submit
   document.querySelector('.form-submit').addEventListener('click', function() {
     this.textContent = 'Inquiry Sent — We\'ll Be in Touch ✓';
-    this.style.background = '#3a6b3a';
-    this.style.color = '#e8f5e8';
-    setTimeout(() => {
-      this.textContent = 'Send My Inquiry →';
-      this.style.background = '';
-      this.style.color = '';
-    }, 3500);
-  });
-</script>
-</body>
-</html>
+    this.s

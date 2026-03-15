@@ -563,7 +563,7 @@
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 24px;
   }
 
@@ -586,8 +586,8 @@
 
   .band-card:hover .band-card-inner { border-color: rgba(201,168,76,0.35); }
 
-  .band-card.featured .band-card-inner { min-height: 560px; }
-  .band-card:not(.featured) .band-card-inner { min-height: 380px; }
+  .band-card.featured .band-card-inner { min-height: 480px; }
+  .band-card:not(.featured) .band-card-inner { min-height: 480px; }
 
   .band-card-bg {
     position: absolute;
@@ -644,7 +644,7 @@
     margin-bottom: 10px;
   }
 
-  .band-card:not(.featured) .band-name { font-size: 26px; }
+  .band-card:not(.featured) .band-name { font-size: 36px; }
 
   .band-desc {
     font-size: 13px;
@@ -1399,7 +1399,7 @@
     <p class="hero-eyebrow">Luxury Event Entertainment · New York & New Jersey</p>
     <img src="BEG-trans.png" alt="Barnstorm Entertainment" style="width:280px;height:auto;margin:0 auto 24px;display:block;opacity:0.95;">
     <h1 class="hero-title"><span class="hero-title-top">Where Great Events Become</span><br><em>Legendary Parties.</em></h1>
-    <p class="hero-sub">Flagship bands, curated talent, and concert-level audio and lighting — all under one roof.</p>
+    <p class="hero-sub">Hand-picked talent with concert-level audio and lighting — all under one roof.</p>
     <div class="hero-actions">
       <a href="#bands" class="btn-primary"><span>Explore Our Bands</span></a>
       <a href="#inquire" class="btn-outline">Start Planning Your Event</a>
@@ -1513,7 +1513,7 @@
   <div class="bands-header">
     <div>
       <div class="section-eyebrow reveal">Our Bands</div>
-      <h2 class="section-title reveal reveal-delay-1">The Roster</h2>
+      <h2 class="section-title reveal reveal-delay-1">The Lineup</h2>
     </div>
     <p class="section-body reveal reveal-delay-2" style="max-width:360px;font-size:14px;">Every act is rehearsed, versatile, and ready to move a room — from ceremony to last dance.</p>
   </div>
@@ -1521,17 +1521,8 @@
     <!-- Featured Band -->
     <div class="band-card featured reveal">
       <div class="band-card-inner">
-        <div class="band-card-bg">
-          <div style="position:absolute;top:40px;left:50%;transform:translateX(-50%);text-align:center;">
-            <div class="stage-lights" style="justify-content:center;gap:24px;margin-bottom:12px;">
-              <div class="stage-light" style="height:120px;"></div>
-              <div class="stage-light" style="height:100px;"></div>
-              <div class="stage-light" style="height:130px;"></div>
-              <div class="stage-light" style="height:110px;"></div>
-              <div class="stage-light" style="height:100px;"></div>
-            </div>
-            <div style="width:240px;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,0.3),transparent);"></div>
-          </div>
+        <div class="band-card-bg" style="background:none;">
+          <img src="barnstorm-trans.png" alt="The Barnstorm Band" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
         </div>
         <div class="band-overlay"></div>
         <div class="band-card-content">

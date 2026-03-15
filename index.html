@@ -57,16 +57,19 @@
   }
 
   .nav-logo {
-    font-family: var(--font-sans);
-    font-size: 18px;
-    font-weight: 800;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ivory);
     text-decoration: none;
+    display: flex;
+    align-items: center;
   }
 
-  .nav-logo span { color: var(--gold); }
+  .nav-logo img {
+    height: 52px;
+    width: auto;
+    display: block;
+    transition: opacity 0.2s;
+  }
+
+  .nav-logo img:hover { opacity: 0.85; }
 
   .nav-links {
     display: flex;
@@ -1371,7 +1374,7 @@
 
 <!-- NAV -->
 <nav id="navbar">
-  <a href="#" class="nav-logo">Barn<span>storm</span></a>
+  <a href="#" class="nav-logo"><img src="BEG-trans.png" alt="Barnstorm Entertainment"></a>
   <ul class="nav-links">
     <li><a href="#bands">Bands</a></li>
     <li><a href="#av">Production</a></li>
@@ -1396,6 +1399,7 @@
   <div class="hero-lines"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Luxury Event Entertainment · New York & New Jersey</p>
+    <img src="BEG-trans.png" alt="Barnstorm Entertainment" style="width:200px;height:auto;margin:0 auto 24px;display:block;opacity:0.95;">
     <h1 class="hero-title">Where Great Events Become<br><em>Legendary Parties.</em></h1>
     <p class="hero-sub">Flagship bands, curated talent, and concert-level audio and lighting — all under one roof.</p>
     <div class="hero-actions">
@@ -1829,7 +1833,9 @@
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <span class="footer-logo">Barn<span>storm</span></span>
+      <a href="#" style="display:inline-block;margin-bottom:20px;">
+        <img src="BEG-trans.png" alt="Barnstorm Entertainment" style="height:90px;width:auto;display:block;">
+      </a>
       <p class="footer-tagline">"Less directory,<br>more point of view."</p>
       <div class="footer-social">
         <a href="#" class="social-link" aria-label="Instagram">

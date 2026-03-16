@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Bands — Barnstorm Entertainment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0a0905; --near-black: #111009; --charcoal: #1c1a14; --warm-dark: #231f16;
+    --gold: #c9a84c; --gold-light: #e2c47a; --gold-dim: #8a6e30;
+    --ivory: #f4f0e6; --ivory-dim: #c8c2b0; --white: #faf8f3;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--ivory); font-family: var(--font-body); font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 60px; background: rgba(10,9,5,0.97); border-bottom: 1px solid rgba(201,168,76,0.15); }
+  .nav-logo { text-decoration: none; display: flex; align-items: center; }
+  .nav-logo img { height: 72px; width: auto; display: block; transition: opacity 0.2s; }
+  .nav-logo img:hover { opacity: 0.85; }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a { font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ivory-dim); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+  .nav-cta { font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 12px 28px; text-decoration: none; font-weight: 600; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  .page-header { padding: 160px 60px 80px; background: radial-gradient(ellipse at 60% 0%, rgba(201,168,76,0.07) 0%, transparent 60%), var(--near-black); border-bottom: 1px solid rgba(201,168,76,0.1); text-align: center; position: relative; overflow: hidden; }
+  .page-header::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.12) 30%, rgba(201,168,76,0.12) 70%, transparent); transform: translateX(-50%); }
+  .page-eyebrow { font-family: var(--font-sans); font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 16px; }
+  .page-eyebrow::before, .page-eyebrow::after { content: ''; width: 40px; height: 1px; background: var(--gold); flex-shrink: 0; }
+  .page-title { font-family: var(--font-display); font-size: clamp(48px, 6vw, 80px); font-weight: 300; line-height: 1.05; color: var(--white); margin-bottom: 24px; }
+  .page-title em { font-style: italic; color: var(--gold-light); }
+  .page-subtitle { font-size: 16px; color: var(--ivory-dim); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+
+  /* Band cards */
+  .bands-section { padding: 100px 60px; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 4px; }
+
+  .band-row { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; text-decoration: none; }
+  .band-row.reverse { direction: rtl; }
+  .band-row.reverse > * { direction: ltr; }
+
+  .band-row-image { position: relative; overflow: hidden; }
+  .band-row-image img { width: 100%; height: 100%; object-fit: cover; min-height: 480px; display: block; transition: transform 0.6s ease; filter: grayscale(15%); }
+  .band-row:hover .band-row-image img { transform: scale(1.03); filter: grayscale(0%); }
+  .band-row-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, transparent 50%, rgba(10,9,5,0.3)); pointer-events: none; }
+  .band-row.reverse .band-row-image::after { background: linear-gradient(to left, transparent 50%, rgba(10,9,5,0.3)); }
+
+  .band-row-info { background: var(--warm-dark); border: 1px solid rgba(201,168,76,0.1); padding: 60px 56px; display: flex; flex-direction: column; justify-content: center; transition: border-color 0.3s; }
+  .band-row:hover .band-row-info { border-color: rgba(201,168,76,0.3); }
+
+  .band-tag { display: inline-block; font-family: var(--font-sans); font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.4); padding: 6px 14px; margin-bottom: 20px; width: fit-content; }
+  .band-row-name { font-family: var(--font-display); font-size: clamp(36px, 4vw, 52px); font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 16px; }
+  .band-row-desc { font-size: 14px; color: var(--ivory-dim); line-height: 1.8; margin-bottom: 28px; }
+  .band-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+  .chip { font-family: var(--font-sans); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); border: 1px solid rgba(201,168,76,0.2); padding: 6px 14px; }
+  .band-cta { font-family: var(--font-sans); font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 10px; transition: gap 0.2s; }
+  .band-row:hover .band-cta { gap: 16px; }
+  .band-cta::after { content: '→'; }
+
+  /* CTA strip */
+  .cta-strip { background: var(--charcoal); border-top: 1px solid rgba(201,168,76,0.12); border-bottom: 1px solid rgba(201,168,76,0.12); padding: 80px 60px; text-align: center; }
+  .cta-strip h2 { font-family: var(--font-display); font-size: clamp(32px, 4vw, 52px); font-weight: 300; color: var(--white); margin-bottom: 16px; }
+  .cta-strip h2 em { font-style: italic; color: var(--gold-light); }
+  .cta-strip p { font-size: 15px; color: var(--ivory-dim); max-width: 480px; margin: 0 auto 36px; line-height: 1.7; }
+  .btn-primary { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; background: var(--gold); color: var(--black); padding: 18px 44px; text-decoration: none; display: inline-block; transition: background 0.25s; }
+  .btn-primary:hover { background: var(--gold-light); }
+
+  footer { background: var(--near-black); border-top: 1px solid rgba(201,168,76,0.12); padding: 48px 60px; }
+  .footer-bottom { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+  .footer-logo img { height: 60px; width: auto; }
+  .footer-copy { font-size: 12px; color: rgba(200,194,176,0.35); }
+  .footer-back { font-family: var(--font-sans); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-dim); text-decoration: none; transition: color 0.2s; }
+  .footer-back:hover { color: var(--gold); }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; } .nav-links { display: none; }
+    .page-header { padding: 120px 28px 60px; }
+    .bands-section { padding: 60px 28px; }
+    .band-row { grid-template-columns: 1fr; direction: ltr !important; }
+    .band-row-image img { min-height: 300px; }
+    .band-row-info { padding: 40px 32px; }
+    .cta-strip { padding: 60px 28px; }
+    footer { padding: 40px 28px; }
+    .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="BEG-trans.png" alt="Barnstorm Entertainment"></a>
+  <ul class="nav-links">
+    <li><a href="bands.html" class="active">Bands</a></li>
+    <li><a href="index.html#av">Production</a></li>
+    <li><a href="index.html#events">Events</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="index.html#testimonials">Reviews</a></li>
+    <li><a href="index.html#inquire">Contact</a></li>
+  </ul>
+  <a href="index.html#inquire" class="nav-cta">Start Planning</a>
+</nav>
+
+<div class="page-header">
+  <div class="page-eyebrow">Every Act, Hand-Picked</div>
+  <h1 class="page-title">The <em>Lineup</em></h1>
+  <p class="page-subtitle">Three distinct acts. One standard of excellence. Whether you want a powerhouse flagship band or a tighter ensemble, every Barnstorm act is rehearsed, versatile, and built to move a room.</p>
+</div>
+
+<div class="bands-section">
+
+  <a href="band-barnstorm.html" class="band-row">
+    <div class="band-row-image">
+      <img src="Band-TheBarnstorm.png" alt="The Barnstorm">
+    </div>
+    <div class="band-row-info">
+      <span class="band-tag">Flagship Act</span>
+      <div class="band-row-name">The Barnstorm</div>
+      <p class="band-row-desc">An 8-12 piece powerhouse performing across 6 decades of the greatest hits — with soul, precision, and stage presence that commands the room from first note to last.</p>
+      <div class="band-chips">
+        <span class="chip">8-12 Pieces</span>
+        <span class="chip">Live Horns</span>
+        <span class="chip">Ceremony &amp; Cocktail Hour</span>
+        <span class="chip">After Party DJ</span>
+      </div>
+      <span class="band-cta">Explore The Barnstorm</span>
+    </div>
+  </a>
+
+  <a href="band-alexmiller.html" class="band-row reverse">
+    <div class="band-row-image">
+      <img src="Band-AlexMiller.png" alt="Alex Miller Band">
+    </div>
+    <div class="band-row-info">
+      <span class="band-tag">Curated Roster</span>
+      <div class="band-row-name">Alex Miller Band</div>
+      <p class="band-row-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua — with energy, style, and a set list built for celebration.</p>
+      <div class="band-chips">
+        <span class="chip">Lorem Ipsum</span>
+        <span class="chip">Lorem Ipsum</span>
+        <span class="chip">Lorem Ipsum</span>
+      </div>
+      <span class="band-cta">Explore Alex Miller Band</span>
+    </div>
+  </a>
+
+  <a href="band-topshelf.html" class="band-row">
+    <div class="band-row-image">
+      <img src="Band-TopShelf.png" alt="Top Shelf Party Band">
+    </div>
+    <div class="band-row-info">
+      <span class="band-tag">Curated Roster</span>
+      <div class="band-row-name">Top Shelf Party Band</div>
+      <p class="band-row-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation — built for dance floors, electric rooms, and unforgettable nights.</p>
+      <div class="band-chips">
+        <span class="chip">Lorem Ipsum</span>
+        <span class="chip">Lorem Ipsum</span>
+        <span class="chip">Lorem Ipsum</span>
+      </div>
+      <span class="band-cta">Explore Top Shelf Party Band</span>
+    </div>
+  </a>
+
+</div>
+
+<div class="cta-strip">
+  <h2>Not sure which band is <em>right for you?</em></h2>
+  <p>Tell us about your event and we'll match you with the perfect act — or help you build something custom.</p>
+  <a href="index.html#inquire" class="btn-primary">Start Planning Your Event</a>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <a href="index.html" class="footer-logo"><img src="BEG-trans.png" alt="Barnstorm Entertainment"></a>
+    <p class="footer-copy">© 2025 Barnstorm Entertainment. All rights reserved.</p>
+    <a href="index.html" class="footer-back">← Back to Home</a>
+  </div>
+</footer>
+
+</body>
+</html>

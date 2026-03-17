@@ -532,10 +532,12 @@
     inset: 0;
     opacity: 0;
     transition: opacity 1.2s ease-in-out;
+    z-index: 0;
   }
 
   .why-slideshow-slide.active {
     opacity: 1;
+    z-index: 1;
   }
 
   .why-slideshow-slide img {
@@ -1962,9 +1964,10 @@
   setTimeout(checkReveals, 800);
 
   // Why Barnstorm Slideshow
-  (function() {
+  document.addEventListener('DOMContentLoaded', function() {
     const slides = document.querySelectorAll('#whySlideshow .why-slideshow-slide');
     const dotsContainer = document.getElementById('whySlideshowDots');
+    if (!slides.length || !dotsContainer) return;
     let current = 0;
     let timer;
 
@@ -1972,7 +1975,7 @@
     slides.forEach((_, i) => {
       const dot = document.createElement('div');
       dot.className = 'why-slideshow-dot' + (i === 0 ? ' active' : '');
-      dot.addEventListener('click', () => goTo(i));
+      dot.addEventListener('click', () => { stop(); goTo(i); start(); });
       dotsContainer.appendChild(dot);
     });
 
@@ -1987,7 +1990,6 @@
     }
 
     function next() { goTo(current + 1); }
-
     function start() { timer = setInterval(next, 3500); }
     function stop() { clearInterval(timer); }
 
@@ -1997,7 +1999,7 @@
     container.addEventListener('mouseleave', start);
 
     start();
-  })();
+  });
   document.querySelector('.form-submit').addEventListener('click', function() {
     this.textContent = 'Inquiry Sent — We\'ll Be in Touch ✓';
     this.s

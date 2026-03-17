@@ -519,7 +519,7 @@
     background: none;
   }
 
-  /* Slideshow */
+  /* Slideshow — pure CSS, no JS required */
   .why-slideshow {
     position: absolute;
     inset: 0;
@@ -531,13 +531,7 @@
     position: absolute;
     inset: 0;
     opacity: 0;
-    transition: opacity 1.2s ease-in-out;
     z-index: 0;
-  }
-
-  .why-slideshow-slide.active {
-    opacity: 1;
-    z-index: 1;
   }
 
   .why-slideshow-slide img {
@@ -548,6 +542,30 @@
     display: block;
   }
 
+  /* 12 slides × 3.5s each = 42s total cycle */
+  .why-slideshow-slide:nth-child(1)  { animation: slideFade 42s infinite 0s; }
+  .why-slideshow-slide:nth-child(2)  { animation: slideFade 42s infinite 3.5s; }
+  .why-slideshow-slide:nth-child(3)  { animation: slideFade 42s infinite 7s; }
+  .why-slideshow-slide:nth-child(4)  { animation: slideFade 42s infinite 10.5s; }
+  .why-slideshow-slide:nth-child(5)  { animation: slideFade 42s infinite 14s; }
+  .why-slideshow-slide:nth-child(6)  { animation: slideFade 42s infinite 17.5s; }
+  .why-slideshow-slide:nth-child(7)  { animation: slideFade 42s infinite 21s; }
+  .why-slideshow-slide:nth-child(8)  { animation: slideFade 42s infinite 24.5s; }
+  .why-slideshow-slide:nth-child(9)  { animation: slideFade 42s infinite 28s; }
+  .why-slideshow-slide:nth-child(10) { animation: slideFade 42s infinite 31.5s; }
+  .why-slideshow-slide:nth-child(11) { animation: slideFade 42s infinite 35s; }
+  .why-slideshow-slide:nth-child(12) { animation: slideFade 42s infinite 38.5s; }
+
+  /* Each slide is visible for ~3.5s out of 42s total.
+     Fade in: 0-5%, hold: 5-~28%, fade out: ~28-33%, hidden: rest */
+  @keyframes slideFade {
+    0%    { opacity: 0; z-index: 1; }
+    3%    { opacity: 1; z-index: 1; }
+    25%   { opacity: 1; z-index: 1; }
+    28%   { opacity: 0; z-index: 0; }
+    100%  { opacity: 0; z-index: 0; }
+  }
+
   /* Subtle gold vignette over all slides */
   .why-slideshow::after {
     content: '';
@@ -555,32 +573,7 @@
     inset: 0;
     background: linear-gradient(to top, rgba(10,9,5,0.25) 0%, transparent 40%);
     pointer-events: none;
-    z-index: 2;
-  }
-
-  /* Dot indicators */
-  .why-slideshow-dots {
-    position: absolute;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-    z-index: 3;
-  }
-
-  .why-slideshow-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: rgba(201,168,76,0.35);
-    transition: background 0.3s, transform 0.3s;
-    cursor: pointer;
-  }
-
-  .why-slideshow-dot.active {
-    background: var(--gold);
-    transform: scale(1.3);
+    z-index: 5;
   }
 
   .why-image-mock-text {
@@ -1556,7 +1549,7 @@
     <div class="why-visual reveal reveal-delay-2">
       <div class="why-image-mock" style="border:1px solid rgba(201,168,76,0.15);overflow:hidden;">
         <div class="why-slideshow" id="whySlideshow">
-          <div class="why-slideshow-slide active"><img src="Why-01.png" alt="Barnstorm Entertainment"></div>
+          <div class="why-slideshow-slide"><img src="Why-01.png" alt="Barnstorm Entertainment"></div>
           <div class="why-slideshow-slide"><img src="Why-02.png" alt="Barnstorm Entertainment"></div>
           <div class="why-slideshow-slide"><img src="Why-03.png" alt="Barnstorm Entertainment"></div>
           <div class="why-slideshow-slide"><img src="Why-04.png" alt="Barnstorm Entertainment"></div>
@@ -1569,7 +1562,6 @@
           <div class="why-slideshow-slide"><img src="Why-11.png" alt="Barnstorm Entertainment"></div>
           <div class="why-slideshow-slide"><img src="Why-12.png" alt="Barnstorm Entertainment"></div>
         </div>
-        <div class="why-slideshow-dots" id="whySlideshowDots"></div>
       </div>
       <div class="why-accent"></div>
     </div>
@@ -1963,43 +1955,6 @@
   setTimeout(checkReveals, 300);
   setTimeout(checkReveals, 800);
 
-  // Why Barnstorm Slideshow
-  document.addEventListener('DOMContentLoaded', function() {
-    const slides = document.querySelectorAll('#whySlideshow .why-slideshow-slide');
-    const dotsContainer = document.getElementById('whySlideshowDots');
-    if (!slides.length || !dotsContainer) return;
-    let current = 0;
-    let timer;
-
-    // Build dots
-    slides.forEach((_, i) => {
-      const dot = document.createElement('div');
-      dot.className = 'why-slideshow-dot' + (i === 0 ? ' active' : '');
-      dot.addEventListener('click', () => { stop(); goTo(i); start(); });
-      dotsContainer.appendChild(dot);
-    });
-
-    const dots = dotsContainer.querySelectorAll('.why-slideshow-dot');
-
-    function goTo(index) {
-      slides[current].classList.remove('active');
-      dots[current].classList.remove('active');
-      current = (index + slides.length) % slides.length;
-      slides[current].classList.add('active');
-      dots[current].classList.add('active');
-    }
-
-    function next() { goTo(current + 1); }
-    function start() { timer = setInterval(next, 3500); }
-    function stop() { clearInterval(timer); }
-
-    // Pause on hover
-    const container = document.getElementById('whySlideshow');
-    container.addEventListener('mouseenter', stop);
-    container.addEventListener('mouseleave', start);
-
-    start();
-  });
   document.querySelector('.form-submit').addEventListener('click', function() {
     this.textContent = 'Inquiry Sent — We\'ll Be in Touch ✓';
     this.s
